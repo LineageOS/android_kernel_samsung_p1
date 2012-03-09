@@ -29,17 +29,16 @@ struct mfd_cell {
 	atomic_t		*usage_count;
 	int			(*enable)(struct platform_device *dev);
 	int			(*disable)(struct platform_device *dev);
-
 	int			(*suspend)(struct platform_device *dev);
 	int			(*resume)(struct platform_device *dev);
 
 	/* platform data passed to the sub devices drivers */
 	void			*platform_data;
-	size_t			pdata_size;
+	size_t			data_size;
 
 	/*
-	 * These resources can be specified relative to the parent device.
-	 * For accessing hardware you should use resources from the platform dev
+	 * This resources can be specified relatievly to the parent device.
+	 * For accessing device you should use resources from device
 	 */
 	int			num_resources;
 	const struct resource	*resources;

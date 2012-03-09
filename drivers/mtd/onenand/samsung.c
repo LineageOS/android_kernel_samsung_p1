@@ -44,11 +44,12 @@ enum soc_type {
 
 #if defined(CONFIG_SAMSUNG_CAPTIVATE) || defined(CONFIG_SAMSUNG_GALAXYS) || defined(CONFIG_SAMSUNG_GALAXYSB) || defined(CONFIG_SAMSUNG_VIBRANT)
 #include "samsung_gsm.h"
-#elif defined(CONFIG_SAMSUNG_FASCINATE)
+#elif defined(CONFIG_SAMSUNG_FASCINATE) // || defined(CONFIG_SAMSUNG_P1C)
 #include "samsung_fascinate.h"
-#else
-#error Should not be used on aries devices (can brick!).
-#include "samsung.h"
+#elif defined(CONFIG_SAMSUNG_P1) // || defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
+#include "samsung_p1.h"
+/* #error Should not be used on aries/p1 devices (can brick!).
+ #include "samsung.h" */
 #endif
 
 /* END OF DEVICE SPECIFIC PARTITION LAYOUT */
