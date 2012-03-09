@@ -74,10 +74,10 @@ snd-soc-wm8990-objs := wm8990.o
 snd-soc-wm8991-objs := wm8991.o
 snd-soc-wm8993-objs := wm8993.o
 snd-soc-wm8994-objs := wm8994.o wm8994-tables.o wm8958-dsp2.o
-ifeq ($(CONFIG_SND_WM8994_EXTENSIONS),y)
-snd-soc-wm8994-samsung-objs := wm8994_samsung.o wm8994_herring.o wm8994_extensions.o
+ifeq ($(CONFIG_SND_VOODOO),y)
+snd-soc-wm8994-objs := wm8994.o wm8994_p1.o wm8994_voodoo.o
 else
-snd-soc-wm8994-samsung-objs := wm8994_samsung.o wm8994_herring.o
+ snd-soc-wm8994-objs := wm8994.o wm8994_p1.o
 endif
 snd-soc-wm8995-objs := wm8995.o
 snd-soc-wm9081-objs := wm9081.o
@@ -93,6 +93,9 @@ snd-soc-max9877-objs := max9877.o
 snd-soc-tpa6130a2-objs := tpa6130a2.o
 snd-soc-wm2000-objs := wm2000.o
 snd-soc-wm9090-objs := wm9090.o
+
+# NMI625 sound
+snd-soc-nmi625-objs := nmi625-snd.o
 
 obj-$(CONFIG_SND_SOC_88PM860X)	+= snd-soc-88pm860x.o
 obj-$(CONFIG_SND_SOC_AC97_CODEC)	+= snd-soc-ac97.o
@@ -185,3 +188,6 @@ obj-$(CONFIG_SND_SOC_MAX9877)	+= snd-soc-max9877.o
 obj-$(CONFIG_SND_SOC_TPA6130A2)	+= snd-soc-tpa6130a2.o
 obj-$(CONFIG_SND_SOC_WM2000)	+= snd-soc-wm2000.o
 obj-$(CONFIG_SND_SOC_WM9090)	+= snd-soc-wm9090.o
+
+# NMI625 sound
+obj-$(CONFIG_SND_SOC_NMI625)	+= snd-soc-nmi625.o

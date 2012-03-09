@@ -576,6 +576,20 @@ config USB_SWITCH_FSA9480
 	  stereo and mono audio, video, microphone and UART data to use
 	  a common connector port.
 
+config 30PIN_CONN
+        tristate "Accessory detection driver"
+        depends on I2C
+        default n
+        help
+         Provides support for detecting Accessory,such as TA, Keyboard
+
+config MHL_SII9234
+    	tristate "SiI9234 MHL(Mobile HD Link) Transmitter support"
+	depends on I2C && VIDEO_TV20
+	default n
+	---help---
+	Mobile HD Link Transmitter driver for SiI9234
+
 source "drivers/misc/c2port/Kconfig"
 source "drivers/misc/eeprom/Kconfig"
 source "drivers/misc/cb710/Kconfig"
@@ -608,5 +622,24 @@ config SAMSUNG_PARAM
 	default n
 	help
 	  Driver for communication with Samsung's secondary bootloader
+
+config LIVE_OC
+       bool "Support for Live OC"
+       default y
+       help
+         Say Y here to enable Live OC
+
+config FAST_CHARGE
+	bool "Enable AC charge mode at will"
+	default y
+	help
+	  A simple sysfs interface to enable adapters that
+	  are detected as USB to charge as AC.
+
+config BLX
+       bool "Support for Battery Life eXtender"
+       default y
+       help
+         Say Y here to enable Battery Life eXtender
 
 endif # MISC_DEVICES
