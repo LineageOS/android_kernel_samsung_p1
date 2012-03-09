@@ -325,6 +325,13 @@ uint dhd_console_ms = 0;
 module_param(dhd_console_ms, uint, 0644);
 #endif /* defined(DHD_DEBUG) */
 
+/* Control wifi power mode during sleep
+   /sys/module/bcmdhd/parameters/wifi_pm */
+#if defined(CONFIG_HAS_EARLYSUSPEND)
+uint wifi_pm = 0;
+module_param(wifi_pm, uint, 0644);
+#endif /* defined(CONFIG_HAS_EARLYSUSPEND) */
+
 /* ARP offload agent mode : Enable ARP Host Auto-Reply and ARP Peer Auto-Reply */
 uint dhd_arp_mode = 0xb;
 module_param(dhd_arp_mode, uint, 0);
@@ -565,7 +572,7 @@ static int dhd_set_suspend(int value, dhd_pub_t *dhd)
 		} else {
 
 			/* Kernel resumed  */
-			DHD_TRACE(("%s: Remove extra suspend setting \n", __FUNCTION__));
+			DHD_TRACE(("%s: Remove extra suspend setting \n", __FUNCTION__));f
 
 			power_mode = PM_FAST;
 			dhd_wl_ioctl_cmd(dhd, WLC_SET_PM, (char *)&power_mode,
