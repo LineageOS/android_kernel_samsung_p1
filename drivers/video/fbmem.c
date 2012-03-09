@@ -36,7 +36,7 @@
 #include <asm/fb.h>
 
 #ifdef CONFIG_FB_S3C
-#include <samsung/s3cfb.h>
+#include "samsung/s3cfb.h"
 #endif
 
     /*
@@ -757,7 +757,7 @@ fb_read(struct file *file, char __user *buf, size_t count, loff_t *ppos)
 
 	if (info->fbops->fb_read)
 		return info->fbops->fb_read(info, buf, count, ppos);
-	
+
 	total_size = info->screen_size;
 
 	if (total_size == 0)
@@ -822,7 +822,7 @@ fb_write(struct file *file, const char __user *buf, size_t count, loff_t *ppos)
 
 	if (info->fbops->fb_write)
 		return info->fbops->fb_write(info, buf, count, ppos);
-	
+
 	total_size = info->screen_size;
 
 	if (total_size == 0)
@@ -1034,7 +1034,7 @@ fb_set_var(struct fb_info *info, struct fb_var_screeninfo *var)
 
 int
 fb_blank(struct fb_info *info, int blank)
-{	
+{
  	int ret = -EINVAL;
 
  	if (blank > FB_BLANK_POWERDOWN)
@@ -1448,7 +1448,7 @@ out:
 	return res;
 }
 
-static int 
+static int
 fb_release(struct inode *inode, struct file *file)
 __acquires(&info->lock)
 __releases(&info->lock)
@@ -1619,7 +1619,7 @@ static int do_register_framebuffer(struct fb_info *fb_info)
 			fb_info->pixmap.access_align = 32;
 			fb_info->pixmap.flags = FB_PIXMAP_DEFAULT;
 		}
-	}	
+	}
 	fb_info->pixmap.offset = 0;
 
 	if (!fb_info->pixmap.blit_x)
