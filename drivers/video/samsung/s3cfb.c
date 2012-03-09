@@ -39,7 +39,7 @@
 #endif
 #include "s3cfb.h"
 
-#ifdef CONFIG_MACH_ARIES
+#ifdef CONFIG_MACH_ARIES || CONFIG_MACH_P1
 #include "logo_rgb24_wvga_portrait.h"
 #include <mach/regs-clock.h>
 #endif
@@ -105,7 +105,7 @@ static int s3cfb_draw_logo(struct fb_info *fb)
 		}
 	}
 #endif
-#ifndef CONFIG_MACH_ARIES
+#ifndef CONFIG_MACH_ARIES || CONFIG_MACH_P1
 	if (bootloaderfb) {
 		u8 *logo_virt_buf;
 		logo_virt_buf = ioremap_nocache(bootloaderfb,
@@ -115,7 +115,7 @@ static int s3cfb_draw_logo(struct fb_info *fb)
 				fb->var.yres * fb->fix.line_length);
 		iounmap(logo_virt_buf);
 	}
-#else /*CONFIG_SAMSUNG_GALAXYS*/
+#else /*CONFIG_SAMSUNG_GALAXYS | P1*/
 	if (readl(S5P_INFORM5)) //LPM_CHARGING mode
 		memcpy(fb->screen_base, charging, fb->var.yres * fb->fix.line_length);
 	else
