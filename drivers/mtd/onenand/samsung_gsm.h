@@ -1,6 +1,6 @@
 /* linux/drivers/mtd/onenand/samsung_galaxys.h
  *
- * Partition Layout for Samsung Galaxy S (GSM variants)
+ * Partition Layout for Samsung Galaxy S and Tab (GSM variants)
  *
  */
 

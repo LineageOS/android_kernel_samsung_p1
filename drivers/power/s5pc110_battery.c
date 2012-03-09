@@ -45,6 +45,10 @@
 #include <mach/gpio-aries.h>
 #endif
 
+#ifdef CONFIG_MACH_P1
+#include <mach/gpio-p1.h>
+#endif
+
 #include <mach/hardware.h>
 #include <mach/map.h>
 #include <mach/regs-clock.h>
@@ -87,6 +91,11 @@
   #define HIGH_RECOVER_TEMP             580
   #define LOW_BLOCK_TEMP               (-40)
   #define LOW_RECOVER_TEMP               10
+#elif defined (CONFIG_SAMSUNG_P1)
+  #define HIGH_BLOCK_TEMP		450
+  #define HIGH_RECOVER_TEMP		400
+  #define LOW_BLOCK_TEMP		  0
+  #define LOW_RECOVER_TEMP		 20
 #else
   #define HIGH_BLOCK_TEMP		500
   #define HIGH_RECOVER_TEMP		420
