@@ -249,7 +249,27 @@ config MACH_ARIES
 	help
 	  Machine support for Aries
 
-if MACH_ARIES
+config MACH_P1
+	bool "P1"
+	select CPU_S5PV210
+	select ARCH_DISCONTIGMEM_ENABLE
+	select S3C_DEV_WDT
+	select S3C_DEV_I2C1
+	select S3C_DEV_I2C2
+	select S5P_DEV_ONENAND
+	select HAVE_PWM
+	select SAMSUNG_DEV_PWM
+	select ARCH_HAS_CPUFREQ
+	select S3C_DEV_HSMMC
+	select S3C_DEV_HSMMC1 if !S5PV210_SD_CH0_8BIT
+	select S3C_DEV_HSMMC2
+	select S3C_DEV_HSMMC3 if !S5PV210_SD_CH2_8BIT
+	select S5PV210_SETUP_SDHCI
+	select S5PV210_POWER_DOMAIN
+	help
+	  Machine support for P1
+
+if MACH_ARIES || MACH_P1
 choice
 	prompt "Select phone Type"
 
@@ -270,6 +290,24 @@ config PHONE_CRESPO
 	depends on MACH_ARIES
 	help
 	 Select Crespo Phone
+
+config PHONE_P1_GSM
+	bool "P1 GSM locale"
+	depends on MACH_P1
+	help
+	  Select P1 GSM
+
+config PHONE_P1_CDMA
+	bool "P1 CDMA locale"
+	depends on MACH_P1
+	help
+	  Select P1 CDMA
+
+config PHONE_P1_LTN
+	bool "P1 LTN locale"
+	depends on MACH_P1
+	help
+	  Select P1 LTN
 
 endchoice
 
@@ -311,6 +349,30 @@ config SAMSUNG_EPIC
 	depends on MACH_ARIES
 	help
 	 Select Samsung Epic 4G
+
+config SAMSUNG_P1
+	bool "select GTP1000"
+	depends on MACH_P1
+	help
+	 Select Samsung Galaxy Tab GT-P1000
+
+config SAMSUNG_P1C
+	bool "select SCHI800"
+	depends on MACH_P1
+	help
+	 Select Samsung Galaxy Tab SCH-I800
+
+config SAMSUNG_P1L
+	bool "select GTP1000L"
+	depends on MACH_P1
+	help
+	 Select Samsung Galaxy Tab GT-P1000L
+
+config SAMSUNG_P1N
+	bool "select GTP1000N"
+	depends on MACH_P1
+	help
+	 Select Samsung Galaxy Tab GT-P1000N
 endchoice
 endif
 
