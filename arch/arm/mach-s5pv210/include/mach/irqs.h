@@ -70,8 +70,13 @@
 #define IRQ_SPI0		S5P_IRQ_VIC1(15)
 #define IRQ_SPI1		S5P_IRQ_VIC1(16)
 #define IRQ_SPI2		S5P_IRQ_VIC1(17)
+#ifdef CONFIG_MACH_P1
+#define IRQ_ASS			S5P_IRQ_VIC1(18)
+#define IRQ_IIC2		S5P_IRQ_VIC1(19)
+#else
 #define IRQ_IRDA		S5P_IRQ_VIC1(18)
 #define IRQ_IIC2		S5P_IRQ_VIC1(19)
+#endif // CONFIG_MACH_P1
 #define IRQ_IIC3		S5P_IRQ_VIC1(20)
 #define IRQ_HSIRX		S5P_IRQ_VIC1(21)
 #define IRQ_HSITX		S5P_IRQ_VIC1(22)
@@ -140,11 +145,12 @@
 #define S5P_EINT_BASE2		(IRQ_VIC_END + 1)
 #define S5P_IRQ_EINT_BASE   S5P_EINT_BASE2
 
+#define S5P_EINT(x)    ((x) + S5P_IRQ_EINT_BASE)
+
 /* GPIO interrupt */
 #define S5P_GPIOINT_BASE	(IRQ_EINT(31) + 1)
 #define S5P_GPIOINT_GROUP_MAXNR	22
-
-#define S5P_EINT(x)    ((x) + S5P_IRQ_EINT_BASE)
+#define S5P_IRQ_GPIOINT(x)     (S5P_GPIOINT_BASE + (x))
 
 /* Compatibility */
 #define IRQ_LCD_FIFO		IRQ_LCD0
