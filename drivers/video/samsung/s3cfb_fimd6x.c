@@ -22,6 +22,17 @@
 
 #include "s3cfb.h"
 
+#if defined(CONFIG_FB_S3C_LVDS)
+#if defined(CONFIG_TARGET_PCLK_44_46)
+	#define __USE_DIRECT_SCLK__
+#elif defined(CONFIG_TARGET_PCLK_47_6)
+	//P1_ATT PCLK -> 47.6MHz
+	#define __USE_DIRECT_SCLK__
+#else
+	#define __USE_DIRECT_SCLK__
+#endif
+#endif
+
 void s3cfb_check_line_count(struct s3cfb_global *ctrl)
 {
 	int timeout = 30 * 5300;
@@ -174,6 +185,7 @@ int s3cfb_set_clock(struct s3cfb_global *ctrl)
 
 	/* fixed clock source: hclk */
 	cfg = readl(ctrl->regs + S3C_VIDCON0);
+#if 0
 	cfg &= ~(S3C_VIDCON0_CLKSEL_MASK | S3C_VIDCON0_CLKVALUP_MASK |
 		 S3C_VIDCON0_VCLKEN_MASK | S3C_VIDCON0_CLKDIR_MASK |
 		 S3C_VIDCON0_CLKVAL_F(-1));
@@ -200,7 +212,8 @@ int s3cfb_set_clock(struct s3cfb_global *ctrl)
 	}
 
 	div = src_clk / vclk;
-	if (src_clk % vclk)
+//	if (src_clk % vclk)
+	if (src_clk % vclk > vclk / 2)
 		div++;
 
 	if ((src_clk/div) > maxclk)
@@ -612,18 +625,6 @@ int s3cfb_set_buffer_address(struct s3cfb_global *ctrl, int id)
 	return 0;
 }
 
-int s3cfb_set_alpha_value_width(struct s3cfb_global *ctrl, int id)
-{
-       struct fb_info *fb = ctrl->fb[id];
-       struct fb_var_screeninfo *var = &fb->var;
-
-       if (var->bits_per_pixel == 32 && var->transp.length > 0)
-               writel(1, ctrl->regs + S3C_BLENDCON);
-       else
-               writel(0, ctrl->regs + S3C_BLENDCON);
-
-}
-
 int s3cfb_set_alpha_blending(struct s3cfb_global *ctrl, int id)
 {
 	struct s3cfb_window *win = ctrl->fb[id]->par;
@@ -754,4 +755,16 @@ int s3cfb_set_chroma_key(struct s3cfb_global *ctrl, int id)
 
 	return 0;
 }
+
+#if defined(CONFIG_FB_S3C_MDNIE)
+int s3cfb_ielcd_enable(struct s3cfb_global *ctrl, int en)
+{
+	if(en)
+		writel(0x3, ctrl->regs + S3C_LCDREG(0x27c));
+	else
+		writel(0x0, ctrl->regs + S3C_LCDREG(0x27c));
+
+	return 0;
+}
+#endif
 

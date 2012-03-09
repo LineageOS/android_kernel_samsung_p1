@@ -1,9 +1,8 @@
 /*
  * UART/USB path switching driver for Samsung Electronics devices.
  *
- * Copyright (C) 2010 Samsung Electronics.
- *
- * Authors: Ikkeun Kim <iks.kim@samsung.com>
+ *  Copyright (C) 2010 Samsung Electronics
+ *  Ikkeun Kim <iks.kim@samsung.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -21,7 +20,7 @@
 #include <linux/slab.h>
 #include <linux/switch.h>
 #include <linux/fsa9480.h>
-#include <linux/mfd/max8998.h>
+#include <linux/sec_battery.h>
 #include <linux/regulator/consumer.h>
 #include <linux/moduleparam.h>
 #include <asm/mach/arch.h>
@@ -32,6 +31,8 @@
 #include <mach/regs-clock.h>
 #include <mach/regs-gpio.h>
 #include <plat/gpio-cfg.h>
+#include <plat/devs.h>
+#include <linux/moduleparam.h>
 
 struct sec_switch_struct {
 	struct sec_switch_platform_data *pdata;
@@ -89,6 +90,8 @@ static ssize_t uart_sel_store(struct device *dev, struct device_attribute *attr,
 		secsw->switch_sel &= ~UART_SEL_MASK;
 		pr_debug("[UART Switch] Path : MODEM\n");
 	}
+
+//	switching_value_update();
 
 	if (sec_set_param_value)
 		sec_set_param_value(__SWITCH_SEL, &secsw->switch_sel);
@@ -229,12 +232,13 @@ static int sec_switch_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 
+
 	secsw->pdata = pdata;
 	secsw->switch_sel = 1;
 
 	dev_set_drvdata(switch_dev, secsw);
 
-	/* create sysfs files */
+	// create sysfs files.
 	if (device_create_file(switch_dev, &dev_attr_uart_sel) < 0)
 		pr_err("Failed to create device file(%s)!\n", dev_attr_uart_sel.attr.name);
 
@@ -247,13 +251,14 @@ static int sec_switch_probe(struct platform_device *pdev)
 	if (device_create_file(switch_dev, &dev_attr_disable_vbus) < 0)
 		pr_err("Failed to create device file(%s)!\n", dev_attr_usb_state.attr.name);
 
-	/* run work queue */
+	// run work queue
 	wq = kmalloc(sizeof(struct sec_switch_wq), GFP_ATOMIC);
 	if (wq) {
 		wq->sdata = secsw;
 		INIT_DELAYED_WORK(&wq->work_q, sec_switch_init_work);
 		schedule_delayed_work(&wq->work_q, msecs_to_jiffies(100));
-	} else
+	}
+	else
 		return -ENOMEM;
 
 	return 0;
@@ -262,7 +267,9 @@ static int sec_switch_probe(struct platform_device *pdev)
 static int sec_switch_remove(struct platform_device *pdev)
 {
 	struct sec_switch_struct *secsw = dev_get_drvdata(&pdev->dev);
+	
 	kfree(secsw);
+
 	return 0;
 }
 
