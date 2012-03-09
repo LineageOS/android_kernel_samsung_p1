@@ -81,7 +81,7 @@
 #define IRQ_HSMMC0		S5P_IRQ_VIC1(26)
 #define IRQ_HSMMC1		S5P_IRQ_VIC1(27)
 #define IRQ_HSMMC2		S5P_IRQ_VIC1(28)
-#define IRQ_MIPI_CSIS		S5P_IRQ_VIC1(29)
+#define IRQ_MIPICSI		S5P_IRQ_VIC1(29)
 #define IRQ_MIPIDSI		S5P_IRQ_VIC1(30)
 #define IRQ_ONENAND_AUDI	S5P_IRQ_VIC1(31)
 
@@ -140,11 +140,12 @@
 #define S5P_EINT_BASE2		(IRQ_VIC_END + 1)
 #define S5P_IRQ_EINT_BASE   S5P_EINT_BASE2
 
+#define S5P_EINT(x)    ((x) + S5P_IRQ_EINT_BASE)
+
 /* GPIO interrupt */
 #define S5P_GPIOINT_BASE	(IRQ_EINT(31) + 1)
 #define S5P_GPIOINT_GROUP_MAXNR	22
-
-#define S5P_EINT(x)    ((x) + S5P_IRQ_EINT_BASE)
+#define S5P_IRQ_GPIOINT(x)     (S5P_GPIOINT_BASE + (x))
 
 /* Compatibility */
 #define IRQ_LCD_FIFO		IRQ_LCD0
@@ -215,7 +216,20 @@
 
 /* Set the default NR_IRQS */
 //#define NR_IRQS			(IRQ_EINT(31) + 1)
+#ifdef CONFIG_MACH_P1
+/*
+ * Set the default NR_IRQS
+ * GPIO groups is 27. Each GPIO group can have max 8 GPIO interrupts.
+ *
+ * We should include gpios of all gpio groups from GPIO_A0 until GPIO_J4 to
+ * NR_IRQS because 22 gpio groups having gpio interrupts aren't in order and
+ * are mixed with no interrupt gpio groups, then it can give simple irq
+ * computation of gpio interrupts.
+ */
+#define NR_IRQS		(S5P_IRQ_GPIOINT(27 * 8) + 1)
+#else
 #define NR_IRQS		(IRQ_EINT_GROUP22_BASE + IRQ_EINT_GROUP22_NR + 1)
+#endif
 
 #define HALL_SENSOR_IRQ		IRQ_EINT3
 

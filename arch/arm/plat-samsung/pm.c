@@ -98,7 +98,7 @@ void __init pmstats_init(void)
 			memcpy(pmstats_last, pmstats, 4096);
 	}
 
-	memset(pmstats, 0, 4096);
+	memset(pmstats, 0, sizeof(struct pmstats));
 	memcpy(pmstats->magic, PMSTATS_MAGIC, 16);
 
 	debugfs_create_file("pmstats", 0444, NULL, pmstats, &pmstats_ops);
