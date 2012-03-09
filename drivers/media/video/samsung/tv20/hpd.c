@@ -108,7 +108,7 @@ int s5p_hpd_set_hdmiint(void)
 {
 	/* EINT -> HDMI */
 
-	set_irq_type(IRQ_EINT13, IRQ_TYPE_NONE);
+	irq_set_irq_type(IRQ_EINT13, IRQ_TYPE_NONE);
 
 	if (last_hpd_state)
 		s5p_hdmi_disable_interrupts(HDMI_IRQ_HPD_UNPLUG);
@@ -170,9 +170,9 @@ int irq_eint(int irq)
 	}
 
 	if (atomic_read(&hpd_struct.state))
-		set_irq_type(IRQ_EINT13, IRQ_TYPE_EDGE_FALLING);
+		irq_set_irq_type(IRQ_EINT13, IRQ_TYPE_EDGE_FALLING);
 	else
-		set_irq_type(IRQ_EINT13, IRQ_TYPE_EDGE_RISING);
+		irq_set_irq_type(IRQ_EINT13, IRQ_TYPE_EDGE_RISING);
 
 	schedule_work(&hpd_work);
 
@@ -308,7 +308,7 @@ static int __init s5p_hpd_probe(struct platform_device *pdev)
 		last_hpd_state = HPD_LO;
 	}
 
-	set_irq_type(IRQ_EINT13, IRQ_TYPE_EDGE_BOTH);
+	irq_set_irq_type(IRQ_EINT13, IRQ_TYPE_EDGE_BOTH);
 
 	if (request_irq(IRQ_EINT13, s5p_hpd_irq_handler, IRQF_DISABLED,
 		"hpd", s5p_hpd_irq_handler)) {
