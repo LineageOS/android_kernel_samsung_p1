@@ -1,5 +1,5 @@
 /*
- * max8998.h - Voltage regulator driver for the Maxim 8998
+ * max8698.h - Voltage regulator driver for the Maxim 8998
  *
  *  Copyright (C) 2009-2010 Samsung Electrnoics
  *  Kyungmin Park <kyungmin.park@samsung.com>
@@ -64,83 +64,27 @@ struct max8998_regulator_data {
 	struct regulator_init_data	*initdata;
 };
 
-enum cable_type_t {
-	CABLE_TYPE_NONE = 0,
-	CABLE_TYPE_USB,
-	CABLE_TYPE_AC,
-};
-
-/**
- * max8998_adc_table_data
- * @adc_value : max8998 adc value
- * @temperature : temperature(C) * 10
- */
-struct max8998_adc_table_data {
-	int adc_value;
-	int temperature;
-};
-struct max8998_charger_callbacks {
-	void (*set_cable)(struct max8998_charger_callbacks *ptr,
-		enum cable_type_t status);
-};
-
 /**
  * max8998_charger_data - charger data
- * @id: charger id
- * @initdata: charger init data (contraints, supplies, ...)
- * @adc_table: adc_table must be ascending adc value order
  */
 struct max8998_charger_data {
-	struct power_supply *psy_fuelgauge;
-	void (*register_callbacks)(struct max8998_charger_callbacks *ptr);
-	struct max8998_adc_table_data *adc_table;
-	int adc_array_size;
+	int (*charger_dev_register)(struct charger_device *chgdev);
+	void (*charger_dev_unregister)(struct charger_device *chgdev);
+	struct charger_device *chgdev;
 };
 
 /**
  * struct max8998_board - packages regulator init data
- * @regulators: array of defined regulators
  * @num_regulators: number of regultors used
- * @irq_base: base IRQ number for max8998, required for IRQs
- * @ono: power onoff IRQ number for max8998
- * @buck_voltage_lock: Do NOT change the values of the following six
- *   registers set by buck?_voltage?. The voltage of BUCK1/2 cannot
- *   be other than the preset values.
- * @buck1_voltage1: BUCK1 DVS mode 1 voltage register
- * @buck1_voltage2: BUCK1 DVS mode 2 voltage register
- * @buck1_voltage3: BUCK1 DVS mode 3 voltage register
- * @buck1_voltage4: BUCK1 DVS mode 4 voltage register
- * @buck2_voltage1: BUCK2 DVS mode 1 voltage register
- * @buck2_voltage2: BUCK2 DVS mode 2 voltage register
- * @buck1_set1: BUCK1 gpio pin 1 to set output voltage
- * @buck1_set2: BUCK1 gpio pin 2 to set output voltage
- * @buck1_default_idx: Default for BUCK1 gpio pin 1, 2
- * @buck2_set3: BUCK2 gpio pin to set output voltage
- * @buck2_default_idx: Default for BUCK2 gpio pin.
- * @wakeup: Allow to wake up from suspend
- * @rtc_delay: LP3974 RTC chip bug that requires delay after a register
- * write before reading it.
+ * @regulators: array of defined regulators
  */
+
 struct max8998_platform_data {
-	struct max8998_regulator_data	*regulators;
 	int				num_regulators;
-	int				irq_base;
-	int				ono;
-	bool				buck_voltage_lock;
-	int				buck1_voltage1;
-	int				buck1_voltage2;
-	int				buck1_voltage3;
-	int				buck1_voltage4;
-	int				buck2_voltage1;
-	int				buck2_voltage2;
-	int				buck1_set1;
-	int				buck1_set2;
-	int				buck1_default_idx;
-	int				buck2_set3;
-	int				buck2_default_idx;
-	bool				wakeup;
-	bool				rtc_delay;
-	struct max8998_charger_data	*charger;
+	struct max8998_regulator_data	*regulators;
+	struct max8998_charger_data		*charger;
+	int							irq_base;
+	int							ono;
 };
 
 #endif /*  __LINUX_MFD_MAX8998_H */
