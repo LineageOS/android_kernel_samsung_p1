@@ -47,6 +47,13 @@ obj-$(CONFIG_PHONE_ARIES_CDMA)	+= dev-s1-phone.o
 obj-$(CONFIG_PHONE_ARIES_CDMA)	+= level.o
 obj-$(CONFIG_PHONE_CRESPO)	+= dev-aries-phone.o
 
+obj-$(CONFIG_MACH_P1)	+= mach-p1.o p1-rfkill.o # sec_switch.o
+#obj-$(CONFIG_MACH_P1)	+= herring-btlpm.o
+obj-$(CONFIG_MACH_P1)	+= herring-watchdog.o
+obj-$(CONFIG_MACH_P1)	+= herring-panel.o
+obj-$(CONFIG_PHONE_P1_GSM)	+= dev-p1-phone.o
+obj-$(CONFIG_PHONE_P1_LTN)	+= dev-p1-phone.o
+
 # device support
 
 obj-y				+= dev-audio.o

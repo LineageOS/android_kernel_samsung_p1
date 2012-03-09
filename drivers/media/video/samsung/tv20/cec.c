@@ -208,7 +208,7 @@ static const struct file_operations cec_fops = {
 	.release = s5p_cec_release,
 	.read    = s5p_cec_read,
 	.write   = s5p_cec_write,
-	.ioctl   = s5p_cec_ioctl,
+	// .ioctl   = s5p_cec_ioctl,
 	.poll    = s5p_cec_poll,
 };
 
