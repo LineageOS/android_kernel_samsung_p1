@@ -213,6 +213,8 @@
 
 #define IRQ_EINT_GROUP(group, no)	(IRQ_EINT_GROUP##group##_BASE + (no))
 
+#define IRQ_EINT_END		(IRQ_EINT_GROUP22_BASE + IRQ_EINT_GROUP22_NR)
+
 /* Set the default NR_IRQS */
 //#define NR_IRQS			(IRQ_EINT(31) + 1)
 #define NR_IRQS		(IRQ_EINT_GROUP22_BASE + IRQ_EINT_GROUP22_NR + 1)
@@ -220,5 +222,8 @@
 #define HALL_SENSOR_IRQ		IRQ_EINT3
 
 #define FIQ_START		0
+
+#define IRQ_MAX8998_BASE		IRQ_EINT_END
+#define IRQ_MAX8998_END		IRQ_EINT_END + 17
 
 #endif /* ASM_ARCH_IRQS_H */
