@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//+48\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 401
+      },
+      "writtenOn": "2012-04-21T01:21:01Z",
+      "side": 1,
+      "message": "texstream is used by pmem also. need to wrap ifdef around it too",
+      "revId": "c6606136d3d0f5c9e2343624caa07af8e9ff421b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//+44\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 401
+      },
+      "writtenOn": "2012-04-21T01:21:01Z",
+      "side": 1,
+      "message": "and here...",
+      "revId": "c6606136d3d0f5c9e2343624caa07af8e9ff421b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
