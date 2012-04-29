@@ -60,6 +60,7 @@ static int show_progress = 1;
 #endif
 
 #if defined(CONFIG_MACH_P1) || defined(CONFIG_MACH_HERRING)
+#include "logo_rgb24_wvga_portrait.h"
 extern unsigned int HWREV;
 #endif
 
@@ -178,9 +179,11 @@ MODULE_PARM_DESC(bootloaderfb, "Address of booting logo image in Bootloader");
 
 static int s3cfb_draw_logo(struct fb_info *fb)
 {
-     memcpy(fb->screen_base, \
-            phys_to_virt(LOGO_MEM_BASE), LOGO_MEM_SIZE);
- 
+	if (readl(S5P_INFORM5)) //LPM_CHARGING mode
+		memcpy(fb->screen_base, charging, fb->var.yres * fb->fix.line_length);
+	else
+		memcpy(fb->screen_base, LOGO_RGB24, fb->var.yres * fb->fix.line_length);
+
         return 0;
 }
 
