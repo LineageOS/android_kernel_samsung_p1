@@ -1,0 +1,9 @@
+Change-Id: Ide2cc11c78c398edff8f1576f5a2b890e5fd7fd2
+Code-Review+2: jt1134 <jt1134@gmail.com>
+Verified+1: jt1134 <jt1134@gmail.com>
+Code-Review+1: Humberto Borba <humberos@gmail.com>
+Submitted-by: jt1134 <jt1134@gmail.com>
+Submitted-at: Tue, 01 May 2012 00:13:05 +0400
+Reviewed-on: http://review.cyanogenmod.com/15216
+Project: CyanogenMod/android_kernel_samsung_p1
+Branch: refs/heads/android-samsung-2.6.35
