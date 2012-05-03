@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//9Bs\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1587,
+      "author": {
+        "id": 2890
+      },
+      "writtenOn": "2012-05-03T19:26:32Z",
+      "side": 1,
+      "message": "Try changing to:\n\t.debounce_time.tv64 \u003d 5 * NSEC_PER_MSEC,",
+      "revId": "93af781088921231b0ef3ba6507343e7967f0f1e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9Bo\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2765,
+      "author": {
+        "id": 2890
+      },
+      "writtenOn": "2012-05-03T19:26:32Z",
+      "side": 1,
+      "message": "Missing lines in sec_switch.h for AP_VBUS_ON, CP_VBUS_ON, \u0026 AP_VBUS_OFF",
+      "revId": "93af781088921231b0ef3ba6507343e7967f0f1e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9Bw\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3117,
+      "author": {
+        "id": 2890
+      },
+      "writtenOn": "2012-05-03T19:26:32Z",
+      "side": 1,
+      "message": "sec_switch.h:sec_switch_platform_data doesn\u0027t have field set_switch_status.  \n\nMany other similar compile errors caused by missing struct fields.",
+      "revId": "93af781088921231b0ef3ba6507343e7967f0f1e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9CU\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7178,
+      "author": {
+        "id": 2890
+      },
+      "writtenOn": "2012-05-03T19:26:32Z",
+      "side": 1,
+      "message": "Change to \u0026p1_s3c_device_i2c10",
+      "revId": "93af781088921231b0ef3ba6507343e7967f0f1e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9B8\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7229,
+      "author": {
+        "id": 2890
+      },
+      "writtenOn": "2012-05-03T19:26:32Z",
+      "side": 1,
+      "message": "Try changing to: \ns5p_reserve_bootmem(crespo_media_devs, ARRAY_SIZE(crespo_media_devs), S5P_RANGE_MFC);",
+      "revId": "93af781088921231b0ef3ba6507343e7967f0f1e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9CY\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7231,
+      "author": {
+        "id": 2890
+      },
+      "writtenOn": "2012-05-03T19:26:32Z",
+      "side": 1,
+      "message": "Also change to \"s5p_device_onenand.name\" to match line 7084.",
+      "revId": "93af781088921231b0ef3ba6507343e7967f0f1e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9CI\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7246,
+      "author": {
+        "id": 2890
+      },
+      "writtenOn": "2012-05-03T19:26:32Z",
+      "side": 1,
+      "message": "Remove node line.",
+      "revId": "93af781088921231b0ef3ba6507343e7967f0f1e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9CE\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7250,
+      "author": {
+        "id": 2890
+      },
+      "writtenOn": "2012-05-03T19:26:32Z",
+      "side": 1,
+      "message": "Remove node line.",
+      "revId": "93af781088921231b0ef3ba6507343e7967f0f1e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9CA\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7255,
+      "author": {
+        "id": 2890
+      },
+      "writtenOn": "2012-05-03T19:26:32Z",
+      "side": 1,
+      "message": "Remove node line.",
+      "revId": "93af781088921231b0ef3ba6507343e7967f0f1e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9CM\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7379,
+      "author": {
+        "id": 2890
+      },
+      "writtenOn": "2012-05-03T19:26:32Z",
+      "side": 1,
+      "message": "Comment out set_serial call unless function added.",
+      "revId": "93af781088921231b0ef3ba6507343e7967f0f1e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9CQ\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7524,
+      "author": {
+        "id": 2890
+      },
+      "writtenOn": "2012-05-03T19:26:32Z",
+      "side": 1,
+      "message": "Missing lines in arch/arm/plat-samsung/include/plat/devs.h for s5p_device_tvout, s5p_device_cec, and s5p_device_hpd",
+      "revId": "93af781088921231b0ef3ba6507343e7967f0f1e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
