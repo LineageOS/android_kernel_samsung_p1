@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//8cY\u003d",
+        "filename": "arch/arm/configs/cyanogenmod_p1_defconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2751
+      },
+      "writtenOn": "2012-05-06T08:16:09Z",
+      "side": 1,
+      "message": "and other variants?\n\nCONFIG_SAMSUNG_P1[C|L|N]\nor\nCONFIG_MACH_P1[C|L|N]",
+      "revId": "f4c9fdcbe190b88e4de0b42d5ba983539c690179",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
