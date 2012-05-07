@@ -63,9 +63,11 @@
 #include <asm/system.h>
 #include <linux/mroute6.h>
 
-#ifdef CONFIG_ANDROID_PARANOID_NETWORK
+#if defined(CONFIG_ANDROID_PARANOID_NETWORK) || defined(CONFIG_ANDROID_MOCK_NETWORK)
 #include <linux/android_aid.h>
+#endif
 
+#ifdef CONFIG_ANDROID_PARANOID_NETWORK
 static inline int current_has_network(void)
 {
 	return in_egroup_p(AID_INET) || capable(CAP_NET_RAW);
@@ -74,6 +76,18 @@ static inline int current_has_network(void)
 static inline int current_has_network(void)
 {
 	return 1;
+}
+#endif
+
+#ifdef CONFIG_ANDROID_MOCK_NETWORK
+static inline int current_mock_network(void)
+{
+       return in_egroup_p(AID_MOCK_INET);
+}
+#else
+static inline int current_mock_network(void)
+{
+       return 0;
 }
 #endif
 
@@ -282,6 +296,11 @@ int inet6_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 	unsigned short snum;
 	int addr_type = 0;
 	int err = 0;
+
+	if (current_mock_network()) {
+		addr->sin6_addr = in6addr_loopback;
+		printk(KERN_INFO "Mocking socket uid=%d", current_uid());
+	}
 
 	/* If the socket has its own bind function then use it. */
 	if (sk->sk_prot->bind)

@@ -85,6 +85,12 @@ config ANDROID_PARANOID_NETWORK
 	help
 		none
 
+config ANDROID_MOCK_NETWORK
+       bool "Make socket networking useless for certain groups"
+       default y
+       help
+		none
+
 config NET_ACTIVITY_STATS
 	bool "Network activity statistics tracking"
 	default y

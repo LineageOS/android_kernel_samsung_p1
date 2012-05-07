@@ -117,9 +117,11 @@
 #include <linux/mroute.h>
 #endif
 
-#ifdef CONFIG_ANDROID_PARANOID_NETWORK
+#if defined(CONFIG_ANDROID_PARANOID_NETWORK) || defined(CONFIG_ANDROID_MOCK_NETWORK)
 #include <linux/android_aid.h>
+#endif
 
+#ifdef CONFIG_ANDROID_PARANOID_NETWORK
 static inline int current_has_network(void)
 {
 	return in_egroup_p(AID_INET) || capable(CAP_NET_RAW);
@@ -128,6 +130,18 @@ static inline int current_has_network(void)
 static inline int current_has_network(void)
 {
 	return 1;
+}
+#endif
+
+#ifdef CONFIG_ANDROID_MOCK_NETWORK
+static inline int current_mock_network(void)
+{
+       return in_egroup_p(AID_MOCK_INET);
+}
+#else
+static inline int current_mock_network(void)
+{
+       return 0;
 }
 #endif
 
@@ -472,6 +486,11 @@ int inet_bind(struct socket *sock, struct sockaddr *uaddr, int addr_len)
 	int chk_addr_ret;
 	int err;
 
+	if (current_mock_network()) {
+		addr->sin_addr.s_addr = INADDR_LOOPBACK;
+		printk(KERN_INFO "Mocking socket uid=%d", current_uid());
+	}
+
 	/* If the socket has its own bind function then use it. (RAW) */
 	if (sk->sk_prot->bind) {
 		err = sk->sk_prot->bind(sk, uaddr, addr_len);
@@ -550,6 +569,11 @@ int inet_dgram_connect(struct socket *sock, struct sockaddr * uaddr,
 {
 	struct sock *sk = sock->sk;
 
+	if (current_mock_network()) {
+		printk(KERN_INFO "Mocking socket uid=%d", current_uid());
+		return -ETIMEDOUT;
+	}
+
 	if (addr_len < sizeof(uaddr->sa_family))
 		return -EINVAL;
 	if (uaddr->sa_family == AF_UNSPEC)
@@ -594,6 +618,11 @@ int inet_stream_connect(struct socket *sock, struct sockaddr *uaddr,
 	struct sock *sk = sock->sk;
 	int err;
 	long timeo;
+
+	if (current_mock_network()) {
+		printk(KERN_INFO "Mocking socket uid=%d", current_uid());
+		return -ETIMEDOUT;
+	}
 
 	if (addr_len < sizeof(uaddr->sa_family))
 		return -EINVAL;
