@@ -29,7 +29,7 @@
 #include <linux/securebits.h>
 #include <linux/syslog.h>
 
-#ifdef CONFIG_ANDROID_PARANOID_NETWORK
+#if defined(CONFIG_ANDROID_PARANOID_NETWORK) || defined(CONFIG_ANDROID_SYSTEM_KMSG_READS)
 #include <linux/android_aid.h>
 #endif
 
@@ -906,6 +906,10 @@ error:
  */
 int cap_syslog(int type, bool from_file)
 {
+#ifdef CONFIG_ANDROID_SYSTEM_KMSG_READS
+	if (current_euid() == AID_SYSTEM)
+		return 0;
+#endif
 	if (type != SYSLOG_ACTION_OPEN && from_file)
 		return 0;
 	if ((type != SYSLOG_ACTION_READ_ALL &&

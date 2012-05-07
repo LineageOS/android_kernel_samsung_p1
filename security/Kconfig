@@ -4,6 +4,9 @@
 
 menu "Security options"
 
+config ANDROID_SYSTEM_KMSG_READS
+       bool "Allow the Android system user to read from the syslog"
+
 config KEYS
 	bool "Enable access key retention support"
 	help
