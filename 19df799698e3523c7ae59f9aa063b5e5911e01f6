@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAS3///i8\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7592,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2012-05-08T10:38:47Z",
+      "side": 1,
+      "message": "They made an AMOLED version too? :D",
+      "revId": "19df799698e3523c7ae59f9aa063b5e5911e01f6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3///i4\u003d",
+        "filename": "arch/arm/mach-s5pv210/mach-p1.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7595,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2012-05-08T10:38:47Z",
+      "side": 1,
+      "message": "P2?",
+      "revId": "19df799698e3523c7ae59f9aa063b5e5911e01f6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
