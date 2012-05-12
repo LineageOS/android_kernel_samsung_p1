@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAS3//+zI\u003d",
+        "filename": "arch/arm/configs/cyanogenmod_p1_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2012-05-12T09:37:58Z",
+      "side": 0,
+      "message": "Keep this one",
+      "revId": "0454f11f395cc20b14e28b6a91fe79d18419294a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3//+zE\u003d",
+        "filename": "arch/arm/configs/cyanogenmod_p1_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2012-05-12T09:37:58Z",
+      "side": 0,
+      "message": "same here",
+      "revId": "0454f11f395cc20b14e28b6a91fe79d18419294a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3//+zA\u003d",
+        "filename": "drivers/cpufreq/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2012-05-12T09:37:58Z",
+      "side": 0,
+      "message": "Keep powersave :)",
+      "revId": "0454f11f395cc20b14e28b6a91fe79d18419294a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
