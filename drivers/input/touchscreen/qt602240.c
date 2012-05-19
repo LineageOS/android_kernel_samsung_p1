@@ -382,7 +382,7 @@ static struct miscdevice backlightnotification_device = {
 static void p1_touchkey_bln_enable(void)
 {
    init_led();
-   touch_led_on(255);
+   touch_led_on(1);
 }
 
 static void p1_touchkey_bln_disable(void)
@@ -1349,7 +1349,7 @@ static ssize_t buttons_enabled_status_write(struct device *dev,
       if(data == 1) {
         pr_info("%s: key function enabled\n", __FUNCTION__);
         buttons_enabled = true;
-        touch_led_on(255);
+        touch_led_on(1);
       }
 
       if(data == 0) {
@@ -1493,7 +1493,7 @@ static void qt602240_input_read(struct qt602240_data *data)
 								led_sw= 0;
 							} else {
 								init_led();
-								touch_led_on(255);
+								touch_led_on(1);
 								led_sw= 1;
 							}
 						}
@@ -2602,7 +2602,7 @@ static int __devinit qt602240_probe(struct i2c_client *client,
     init_led();
 
 #if defined(KEY_LED_SELF)
-    touch_led_on(255);
+    touch_led_on(1);
 #endif
 #if defined(LED_SWITCH)
     led_sw= 1;
@@ -2751,7 +2751,7 @@ static int qt602240_resume(struct i2c_client *client)
 		init_led();
 		p1_touchkey_suspended = false;
 #if defined(KEY_LED_SELF)
-		touch_led_on(255);
+		touch_led_on(1);
 #endif
 #endif      //KEY_LED_CONTROL
 #if defined (LED_SWITCH)
