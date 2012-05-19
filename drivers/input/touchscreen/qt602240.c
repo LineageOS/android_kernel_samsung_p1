@@ -13,6 +13,7 @@
  #include "qt602240.h"
  #include <linux/bln.h>
 
+#include <linux/timer.h>
 #include <linux/device.h>
 #define CONFIG_KEYPAD_CYPRESS_TOUCH_USE_BLN
 #ifdef CONFIG_KEYPAD_CYPRESS_TOUCH_USE_BLN
@@ -26,6 +27,11 @@ static bool p1_touchkey_suspended = false;
 #endif
 
 static bool buttons_enabled = true;
+static bool leds_on = false;
+
+#define LEDS_TIMEOUT 5000
+static struct timer_list leds_timer;
+static void leds_timer_callback( unsigned long data );
 
 #define _SUPPORT_TOUCH_AMPLITUDE_
 
@@ -124,8 +130,21 @@ static void touch_led_on(int val)
     int set = 2;
 //    printk(KERN_DEBUG "[TSP] keyled : %d \n", val );
 
+    if(val>0) val=1;
+    else val=0;
+
     if(val < 42)
         set = 1;
+
+    if(val > 0) {
+    	mod_timer( &leds_timer, jiffies + msecs_to_jiffies(LEDS_TIMEOUT) );
+    }
+    else
+    {
+	// Disable timer
+	mod_timer( &leds_timer, jiffies - 1 );
+    }
+       
 
     if(val > 0 && buttons_enabled)
     {
@@ -149,14 +168,21 @@ static void touch_led_on(int val)
                 //printk(KERN_DEBUG "[TSP] keyled : 2mA\n");
             }
         }
+		leds_on=true;
     }
     else
     {
         gpio_direction_output(KEYLED_EN, 0);
         //printk(KERN_DEBUG "[TSP] keyled : off\n");
         preset = 0;
+		leds_on=false;
     }
 }
+
+void leds_timer_callback( unsigned long data ) {
+	touch_led_on(0);
+}
+
 
 #if 0
 void touch_led_ctl(int type)
@@ -209,9 +235,16 @@ static ssize_t key_led_store(struct device *dev, struct device_attribute *attr,
     }
 
 #if defined (LED_SWITCH)
-    if(led_sw == 1)
+    if(led_sw == 1) {
 #endif
-        touch_led_on(i);
+	if( i > 0 ) {
+		touch_led_on(1);
+	} else {
+		touch_led_on(0);
+	}
+#if defined (LED_SWITCH)
+    }
+#endif
 
     return size;
 }
@@ -1576,6 +1609,14 @@ static irqreturn_t qt602240_interrupt(int irq, void *dev_id)
 {
     struct qt602240_data *data = dev_id;
 
+    if(leds_on==false) {
+		leds_on=true;
+		touch_led_on(1);
+    } else {
+    	// Reactivate timer
+    	mod_timer( &leds_timer, jiffies + msecs_to_jiffies(LEDS_TIMEOUT) );
+    }
+
     qt602240_input_read(data);
 
     return IRQ_HANDLED;
@@ -2423,6 +2464,11 @@ static int __devinit qt602240_probe(struct i2c_client *client,
 
     client->irq = IRQ_TOUCH_INT;
 
+#if defined (KEY_LED_CONTROL)
+    setup_timer( &leds_timer, leds_timer_callback, 0 );
+#endif
+
+
     INIT_WORK(&data->ta_work, qt602240_ta_worker);
 
     data->client = client;
@@ -2633,6 +2679,9 @@ static int __devinit qt602240_probe(struct i2c_client *client,
 
     err_free_irq:
     free_irq(client->irq, data);
+#if defined (KEY_LED_CONTROL)
+    del_timer( &leds_timer);
+#endif
     err_free_object:
     kfree(data->object_message);
     kfree(data->object_table);
@@ -2646,6 +2695,9 @@ static int __devinit qt602240_probe(struct i2c_client *client,
 static int __devexit qt602240_remove(struct i2c_client *client)
 {
 	struct qt602240_data *data = i2c_get_clientdata(client);
+#if defined (KEY_LED_CONTROL)
+	del_timer( &leds_timer );
+#endif
 
 #ifdef CONFIG_HAS_EARLYSUSPEND
 	unregister_early_suspend(&data->early_suspend);
