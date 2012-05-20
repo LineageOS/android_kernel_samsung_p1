@@ -1559,7 +1559,7 @@ static struct platform_device s3c_device_i2c13 = {
 };
 
 
-#if defined(CONFIG_MACH_P1_LTN) && defined(CONFIG_VIDEO_NM6XX)
+#if defined (CONFIG_SAMSUNG_P1L) && defined (CONFIG_VIDEO_NM6XX)
 static	struct	i2c_gpio_platform_data	i2c15_platdata = {
 	.sda_pin		= GPIO_ISDBT_SDA,
 	.scl_pin		= GPIO_ISDBT_SCL,
@@ -3297,8 +3297,7 @@ static void __init qt_touch_init(void)
     s3c_gpio_setpull(gpio, S3C_GPIO_PULL_UP);
 }
 
-#if defined(CONFIG_MACH_P1_LTN)
-#if defined(CONFIG_VIDEO_NM6XX)
+#if defined (CONFIG_SAMSUNG_P1L)
 static void __init nmi_i2s_cfg_gpio_init(void)
 {
 	s3c_gpio_cfgpin(GPIO_I2S_SCLK_18V, S3C_GPIO_SFN(0x4));
@@ -3311,7 +3310,7 @@ static void __init nmi_i2s_cfg_gpio_init(void)
 	s3c_gpio_setpull(GPIO_I2S_LRCLK_18V, S3C_GPIO_PULL_NONE);
 	s3c_gpio_setpull(GPIO_I2S_DATA_18V, S3C_GPIO_PULL_NONE);
 }
-#else
+#elif defined (CONFIG_SAMSUNG_P1N)
 static void __init nmi_pwr_disable(void)
 {	
 	int err = 0;
@@ -3330,7 +3329,6 @@ static void __init nmi_pwr_disable(void)
 		gpio_free(GPIO_ISDBT_PWR_EN);	
 	}	
 }
-#endif
 #endif
 
 
@@ -3430,7 +3428,7 @@ static struct gpio_init_data herring_init_gpios[] = {
 		.pud	= S3C_GPIO_PULL_DOWN,
 		.drv	= S3C_GPIO_DRVSTR_1X,
 	},
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined (CONFIG_SAMSUNG_P1L) || defined (CONFIG_SAMSUNG_P1N)
  	{
 		.num	= S5PV210_GPC1(0),
 		.cfg	= S3C_GPIO_INPUT,
@@ -3469,7 +3467,7 @@ static struct gpio_init_data herring_init_gpios[] = {
 		.pud	= S3C_GPIO_PULL_DOWN,
 		.drv	= S3C_GPIO_DRVSTR_1X,
 	}, */
-#else
+#elif defined (CONFIG_SAMSUNG_P1)
 	/* {
 		.num	= S5PV210_GPC1(0),
 		.cfg	= S3C_GPIO_INPUT,
@@ -3523,7 +3521,7 @@ static struct gpio_init_data herring_init_gpios[] = {
 		.pud	= S3C_GPIO_PULL_DOWN,
 		.drv	= S3C_GPIO_DRVSTR_1X,
 	},
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined (CONFIG_SAMSUNG_P1L) || defined (CONFIG_SAMSUNG_P1N)
 	{
 		.num	= S5PV210_GPD0(3),
 		.cfg	= S3C_GPIO_INPUT,
@@ -3531,7 +3529,7 @@ static struct gpio_init_data herring_init_gpios[] = {
 		.pud	= S3C_GPIO_PULL_DOWN,
 		.drv	= S3C_GPIO_DRVSTR_1X,
 	},
-#else	
+#elif defined (CONFIG_SAMSUNG_P1)	
 // worked here, 2010. 11. 03  13:14 john
 	/*{
 		.num	= S5PV210_GPD0(3),
@@ -3733,20 +3731,20 @@ static struct gpio_init_data herring_init_gpios[] = {
 		.pud	= S3C_GPIO_PULL_DOWN,
 		.drv	= S3C_GPIO_DRVSTR_1X,
 	}, 
-#if defined(CONFIG_MACH_P1_LTN) 
-	{
-		.num	= S5PV210_GPG1(2),
-		.cfg	= S3C_GPIO_INPUT,
-		.val	= S3C_GPIO_SETPIN_NONE,
-		.pud	= S3C_GPIO_PULL_DOWN,
-		.drv	= S3C_GPIO_DRVSTR_1X,
-	}, 
-#else
+#if defined (CONFIG_SAMSUNG_P1) 
 	{
 		.num	= S5PV210_GPG1(2),
 		.cfg	= S3C_GPIO_OUTPUT,
 		.val	= S3C_GPIO_SETPIN_ZERO,
 		.pud	= S3C_GPIO_PULL_NONE,
+		.drv	= S3C_GPIO_DRVSTR_1X,
+	}, 
+#elif defined (CONFIG_SAMSUNG_P1L) || defined (CONFIG_SAMSUNG_P1N)
+	{
+		.num	= S5PV210_GPG1(2),
+		.cfg	= S3C_GPIO_INPUT,
+		.val	= S3C_GPIO_SETPIN_NONE,
+		.pud	= S3C_GPIO_PULL_DOWN,
 		.drv	= S3C_GPIO_DRVSTR_1X,
 	}, 
 #endif
@@ -4321,7 +4319,7 @@ static struct gpio_init_data herring_init_gpios[] = {
 		.pud	= S3C_GPIO_PULL_DOWN,
 		.drv	= S3C_GPIO_DRVSTR_1X,
 	},
-#if !defined(CONFIG_MACH_P1_LTN)
+#if defined (CONFIG_SAMSUNG_P1)
 	{
 		.num	= S5PV210_MP01(0),
 		.cfg	= S3C_GPIO_INPUT,
@@ -4337,7 +4335,7 @@ static struct gpio_init_data herring_init_gpios[] = {
 		.pud	= S3C_GPIO_PULL_DOWN,
 		.drv	= S3C_GPIO_DRVSTR_1X,
 	}, 
-#if !defined(CONFIG_MACH_P1_LTN) 
+#if defined (CONFIG_SAMSUNG_P1) 
         {
 		.num	= S5PV210_MP01(3),
 		.cfg	= S3C_GPIO_INPUT,
@@ -4487,7 +4485,7 @@ static struct gpio_init_data herring_init_gpios[] = {
 		.pud	= S3C_GPIO_PULL_DOWN,
 		.drv	= S3C_GPIO_DRVSTR_1X,
 	}, 
-#if !defined(CONFIG_MACH_P1_LTN)
+#if defined (CONFIG_SAMSUNG_P1)
        {
 		.num	= S5PV210_MP05(6),
 		.cfg	= S3C_GPIO_INPUT,
@@ -6169,16 +6167,7 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
 //	{S5PV210_GPB(3),  // GPIO_BT_nRST
 //			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
-#if defined(CONFIG_MACH_P1_LTN)
-	{S5PV210_GPB(4),  // HWREV_MODE3
-			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
-	{S5PV210_GPB(5),  // HWREV_MODE2
-			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
-	{S5PV210_GPB(6),  // HWREV_MODE1
-			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
-	{S5PV210_GPB(7),  // HWREV_MODE0
-			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
-#else
+#if defined (CONFIG_SAMSUNG_P1)
 	{S5PV210_GPB(4),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
 	{S5PV210_GPB(5),  // NC
@@ -6187,6 +6176,15 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
 	{S5PV210_GPB(7),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
+#elif defined (CONFIG_SAMSUNG_P1L) || defined (CONFIG_SAMSUNG_P1N)
+	{S5PV210_GPB(4),  // HWREV_MODE3
+			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
+	{S5PV210_GPB(5),  // HWREV_MODE2
+			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
+	{S5PV210_GPB(6),  // HWREV_MODE1
+			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
+	{S5PV210_GPB(7),  // HWREV_MODE0
+			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
 #endif
 	{S5PV210_GPC0(0), 
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
@@ -6199,18 +6197,7 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 	{S5PV210_GPC0(4), 
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
 
-#if defined(CONFIG_MACH_P1_LTN) 
-	{S5PV210_GPC1(0),  // I2S_SCLK_1.8V
-			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
-	{S5PV210_GPC1(1),  // I2S_MCLK_1.8V
-			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
-	{S5PV210_GPC1(2),  // I2S_LRCLK_1.8V
-			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
-	{S5PV210_GPC1(3),  // I2S_DATA_1.8V
-			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
-	{S5PV210_GPC1(4),  // NC
-			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
-#else
+#if defined (CONFIG_SAMSUNG_P1)
 	{S5PV210_GPC1(0),  // CMC_SLEEP
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
 	{S5PV210_GPC1(1),  // CMC_EN
@@ -6221,18 +6208,29 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
 	{S5PV210_GPC1(4),  // CMC_BYPASS
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
+#elif defined (CONFIG_SAMSUNG_P1L) || defined (CONFIG_SAMSUNG_P1N)
+	{S5PV210_GPC1(0),  // I2S_SCLK_1.8V
+			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
+	{S5PV210_GPC1(1),  // I2S_MCLK_1.8V
+			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
+	{S5PV210_GPC1(2),  // I2S_LRCLK_1.8V
+			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
+	{S5PV210_GPC1(3),  // I2S_DATA_1.8V
+			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
+	{S5PV210_GPC1(4),  // NC
+			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
 #endif
 	{S5PV210_GPD0(0),  // KEY_LED_EN
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
 	{S5PV210_GPD0(1),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
 
-#if defined(CONFIG_MACH_P1_LTN) 
-	{S5PV210_GPD0(2),   // HWREV_MODE4
-			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
-#else
+#if defined (CONFIG_SAMSUNG_P1)
 	{S5PV210_GPD0(2),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
+#elif defined (CONFIG_SAMSUNG_P1L) || defined (CONFIG_SAMSUNG_P1N)
+	{S5PV210_GPD0(2),   // HWREV_MODE4
+			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
 #endif
 	{S5PV210_GPD0(3),  // LCD_CABC_PWM
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
@@ -6347,12 +6345,12 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
 	{S5PV210_GPG0(1),  // NAND_CMD
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
-#if defined(CONFIG_MACH_P1_LTN)
-	{S5PV210_GPG0(2),   // TOUCH_INT
-			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
-#else
+#if defined (CONFIG_SAMSUNG_P1)
 	{S5PV210_GPG0(2),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN},
+#elif defined (CONFIG_SAMSUNG_P1L) || defined (CONFIG_SAMSUNG_P1N)
+	{S5PV210_GPG0(2),   // TOUCH_INT
+			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
 #endif
 	{S5PV210_GPG0(3),  // NAND_D(0)
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
@@ -6367,10 +6365,10 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
 	{S5PV210_GPG1(1),  // GPS_PWR_EN
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
-#if defined(CONFIG_MACH_P1_LTN) && defined(CONFIG_VIDEO_NM6XX)
+#if defined (CONFIG_SAMSUNG_P1L)
 	{S5PV210_GPG1(2), // ISDBT_RSTn 
 			  S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_DOWN}, 
-#else
+#elif defined (CONFIG_SAMSUNG_P1) || defined (CONFIG_SAMSUNG_P1N)
 	{S5PV210_GPG1(2),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN},
 #endif
@@ -6428,8 +6426,7 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 	{S5PV210_GPI(6),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
 
-#if defined(CONFIG_MACH_P1_LTN) 
-#if defined(CONFIG_VIDEO_NM6XX)
+#if defined (CONFIG_SAMSUNG_P1L) 
 	{S5PV210_GPJ0(0),  // ISDBT_SCL
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
 	{S5PV210_GPJ0(1),  // ISDBT_SDA
@@ -6444,7 +6441,7 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_DOWN},  
 	{S5PV210_GPJ0(6), // ISDBT_ERR
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_DOWN}, 
-#else
+#elif defined (CONFIG_SAMSUNG_P1N) 
 	{S5PV210_GPJ0(0),  // ISDBT_SCL
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
 	{S5PV210_GPJ0(1),  // ISDBT_SDA
@@ -6459,8 +6456,7 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN},  
 	{S5PV210_GPJ0(6), // ISDBT_ERR
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
-#endif
-#else
+#elif defined (CONFIG_SAMSUNG_P1) 
 //	{S5PV210_GPJ0(0),  // GPIO_WLAN_BT_EN
 //			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
 	{S5PV210_GPJ0(1), 
@@ -6478,20 +6474,15 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 #endif
 	{S5PV210_GPJ0(7), 
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
-#if defined(CONFIG_MACH_P1_LTN)
-//	{S5PV210_GPJ1(0),   // GPIO_WLAN_BT_EN
-//			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
-#else
+#if defined (CONFIG_SAMSUNG_P1) 
 	{S5PV210_GPJ1(0),  // NC
-#if defined(CONFIG_MACH_P1_GSM)
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
-#endif
 #endif
 	{S5PV210_GPJ1(1),  // MESSMEMORY_EN
 			S3C_GPIO_SLP_OUT1, S3C_GPIO_PULL_NONE}, 
 	{S5PV210_GPJ1(2), 
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
-#if defined(CONFIG_MACH_P1_LTN) && defined (CONFIG_VIDEO_NM6XX)
+#if defined (CONFIG_SAMSUNG_P1L) 
 	{S5PV210_GPJ1(3), // ISDBT_PWR_EN
 			 S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_DOWN}, 
 #else
@@ -6520,16 +6511,11 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
 	{S5PV210_GPJ3(1), 
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
-#if defined(CONFIG_MACH_P1_LTN)
-#if defined(CONFIG_VIDEO_NM6XX)
-	{S5PV210_GPJ3(2),  // ATV_RSTn (Latin Rev0.3)
-			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
-#else
+#if defined (CONFIG_SAMSUNG_P1N)
 	{S5PV210_GPJ3(2),  // ATV_RSTn (Latin Rev0.3)
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
-#endif
-#else
-	{S5PV210_GPJ3(2),  // NC(Rev0.6), CAM_LDO_EN(Rev0.7)
+#elif defined (CONFIG_SAMSUNG_P1) || defined (CONFIG_SAMSUNG_P1L)
+	{S5PV210_GPJ3(2),  // NC(Rev0.6), CAM_LDO_EN(Rev0.7) // ATV_RSTn (Latin Rev0.3)
 			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
 #endif
 	{S5PV210_GPJ3(3), 
@@ -6556,25 +6542,25 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
 
 	/* memory part */
-#if defined(CONFIG_MACH_P1_LTN)
-	{S5PV210_MP01(0),  // CMC_SHDN
-			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN},
-	{S5PV210_MP01(1),  // CMC_SLEEP
-			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
-#else
+#if defined (CONFIG_SAMSUNG_P1)
 	{S5PV210_MP01(0),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
 	{S5PV210_MP01(1),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
+#elif defined (CONFIG_SAMSUNG_P1L) || defined (CONFIG_SAMSUNG_P1N)
+	{S5PV210_MP01(0),  // CMC_SHDN
+			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN},
+	{S5PV210_MP01(1),  // CMC_SLEEP
+			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
 #endif
 	{S5PV210_MP01(2),  // RESET_REQ_N
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
-#if defined(CONFIG_MACH_P1_LTN)
-	{S5PV210_MP01(3),  // CMC_RST
-			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
-#else
+#if defined (CONFIG_SAMSUNG_P1)
 	{S5PV210_MP01(3),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
+#elif defined (CONFIG_SAMSUNG_P1L) || defined (CONFIG_SAMSUNG_P1N)
+	{S5PV210_MP01(3),  // CMC_RST
+			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
 #endif
 	{S5PV210_MP01(4),  // AP_NANDCS
 			S3C_GPIO_SLP_OUT1, S3C_GPIO_PULL_NONE}, 
@@ -6619,12 +6605,12 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
 	{S5PV210_MP04(3),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
-#if defined(CONFIG_MACH_P1_LTN)
-	{S5PV210_MP04(4),   // CMC_EN
-			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
-#else
+#if defined (CONFIG_SAMSUNG_P1)
 	{S5PV210_MP04(4),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
+#elif defined (CONFIG_SAMSUNG_P1L) || defined (CONFIG_SAMSUNG_P1N)
+	{S5PV210_MP04(4),   // CMC_EN
+			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
 #endif
 	{S5PV210_MP04(5),  // CMC_SDA_1.8V
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
@@ -6643,12 +6629,12 @@ static unsigned int p1_r12_sleep_gpio_table[][3] = {
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_NONE}, 
 	{S5PV210_MP05(4),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
-#if defined(CONFIG_MACH_P1_LTN)
-	{S5PV210_MP05(6),  // CMC_BYPASS
-			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
-#else
+#if defined (CONFIG_SAMSUNG_P1)
 	{S5PV210_MP05(6),  // NC
 			S3C_GPIO_SLP_INPUT, S3C_GPIO_PULL_DOWN}, 
+#elif defined (CONFIG_SAMSUNG_P1L) || defined (CONFIG_SAMSUNG_P1N)
+	{S5PV210_MP05(6),  // CMC_BYPASS
+			S3C_GPIO_SLP_OUT0, S3C_GPIO_PULL_NONE}, 
 #endif
 	{S5PV210_MP05(7),  //UART_SEL
 			S3C_GPIO_SLP_PREV, S3C_GPIO_PULL_NONE},
@@ -7027,7 +7013,7 @@ extern bool keyboard_enable;
 	s3c_config_sleep_gpio_table(ARRAY_SIZE(p1_lcd_tft_sleep_gpio_table),
 	p1_lcd_tft_sleep_gpio_table);
 
-#if defined(CONFIG_MACH_P1_LTN) && defined(CONFIG_VIDEO_NM6XX)
+#if defined (CONFIG_SAMSUNG_P1L) && defined (CONFIG_VIDEO_NM6XX)
 	if(HWREV >= 16) {  
 		s3c_gpio_cfgpin(GPIO_ATV_RSTn_REV10, S3C_GPIO_INPUT);
 		s3c_gpio_setpull(GPIO_ATV_RSTn_REV10, S3C_GPIO_PULL_DOWN);
@@ -7380,7 +7366,7 @@ static struct platform_device *crespo_devices[] __initdata = {
 #if defined CONFIG_USB_DWC_OTG
 	&s3c_device_usb_dwcotg,
 #endif
-#if defined(CONFIG_MACH_P1_LTN) && defined(CONFIG_VIDEO_NM6XX)
+#if defined (CONFIG_SAMSUNG_P1L)  && defined (CONFIG_VIDEO_NM6XX)
 	&s3c_device_i2c15, /* nmi625  */
 #endif	
 	&sec_device_switch,  // samsung switch driver
@@ -7684,7 +7670,7 @@ static void __init p1_machine_init(void)
 	/* cmc623 */
 	i2c_register_board_info(13, i2c_devs13, ARRAY_SIZE(i2c_devs13));
 
-#if defined(CONFIG_MACH_P1_LTN) && defined(CONFIG_VIDEO_NM6XX)
+#if defined (CONFIG_SAMSUNG_P1L) && defined (CONFIG_VIDEO_NM6XX)
 	i2c_register_board_info(15, i2c_devs15, ARRAY_SIZE(i2c_devs15));
 #endif
 
@@ -7747,9 +7733,7 @@ static void __init p1_machine_init(void)
 
 	herring_switch_init();
 
-#if defined(CONFIG_MACH_P1_GSM) || defined(CONFIG_MACH_P1_LTN)
 	gps_gpio_init();
-#endif
 
 	uart_switch_init();
 
@@ -7757,12 +7741,10 @@ static void __init p1_machine_init(void)
 	
 	qt_touch_init();
 
-#if defined(CONFIG_MACH_P1_LTN)
-#if defined(CONFIG_VIDEO_NM6XX)
+#if defined (CONFIG_SAMSUNG_P1L)
 	nmi_i2s_cfg_gpio_init();
-#else
+#elif defined (CONFIG_SAMSUNG_P1N)
 	nmi_pwr_disable();  // Disable the ISDBT PWR : Only Latin HW 0.3
-#endif
 #endif
 
 #ifdef CONFIG_VIDEO_TV20

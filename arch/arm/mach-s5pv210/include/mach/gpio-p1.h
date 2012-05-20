@@ -60,7 +60,7 @@
 
 #define GPIO_BT_nRST			S5PV210_GPB(3)
 
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_HWREV_MODE3		S5PV210_GPB(4)
 #define GPIO_HWREV_MODE2		S5PV210_GPB(5)
 #define GPIO_HWREV_MODE1		S5PV210_GPB(6)
@@ -89,7 +89,7 @@
 #define GPIO_REC_PCM_OUT		S5PV210_GPC0(4)
 #define GPIO_REC_PCM_OUT_AF		3
 
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_I2S_SCLK_18V		S5PV210_GPC1(0)
 #define GPIO_I2S_MCLK_18V		S5PV210_GPC1(1)
 #define GPIO_I2S_LRCLK_18V		S5PV210_GPC1(2)
@@ -121,7 +121,7 @@
 
 #define GPIO_GPD00			S5PV210_GPD0(0)
 
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_ATV_RSTn_REV07		S5PV210_GPD0(1)
 #define GPIO_HWREV_MODE4		S5PV210_GPD0(2)
 #endif
@@ -130,7 +130,7 @@
 
 #define GPIO_VIBTONE_PWM1		S5PV210_GPD0(2)
 
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_ATV_RSTn_REV10		S5PV210_GPD0(3)
 #else
 #define GPIO_GPD03			S5PV210_GPD0(3)
@@ -282,7 +282,7 @@
 #define GPIO_NAND_CMD			S5PV210_GPG0(1)
 #define GPIO_NAND_CMD_AF		2
 
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_TOUCH_INT				S5PV210_GPG0(2)
 #else
 #define GPIO_ALS_SCL_28V		S5PV210_GPG0(2)
@@ -304,7 +304,7 @@
 
 #define GPIO_GPS_PWR_EN			S5PV210_GPG1(1)
 
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_ISDBT_RSTn			S5PV210_GPG1(2)
 #else
 #define GPIO_WLAN_RST			S5PV210_GPG1(2)
@@ -412,7 +412,7 @@
 #define GPIO_KBC0_AF			3
 #define GPIO_GPH20				S5PV210_GPH2(0)
 #define GPIO_REMOTE_SENSE_IRQ		S5PV210_GPH2(0)
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_TOUCH_EN			S5PV210_GPH2(1)
 #define GPIO_TOUCH_EN_AF			1
 #else
@@ -426,7 +426,7 @@
 #define GPIO_KBC2_AF			3
 #define GPIO_GPH22				S5PV210_GPH2(2)
 
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_35_INT_TEST			S5PV210_GPH2(3) //  Rev1.1 (Only latin HW05) 
 #endif
 
@@ -494,7 +494,7 @@
 #define GPIO_GPI6			S5PV210_GPI(6)
 
 /* GPJ0 */
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_ISDBT_SCL				S5PV210_GPJ0(0)
 #define GPIO_ISDBT_SDA				S5PV210_GPJ0(1)
 #define GPIO_ISDBT_CLK				S5PV210_GPJ0(2)
@@ -518,7 +518,7 @@
 
 #define GPIO_HWREV_MODE5		S5PV210_GPJ0(7)
 
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_WLAN_BT_EN			S5PV210_GPJ1(0)
 #elif defined(CONFIG_MACH_P1_GSM)
 /* On GSM */
@@ -531,7 +531,7 @@
 #define GPIO_EAR_SEL			S5PV210_GPJ2(3)
 
 #define GPIO_CAM_MEGA_EN		S5PV210_GPJ1(2)
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_ISDBT_PWR_EN		S5PV210_GPJ1(3)
 #else
 #define GPIO_TOUCH_EN			S5PV210_GPJ1(3)
@@ -552,7 +552,7 @@
 
 //#define GPIO_EAR_SEL			S5PV210_GPJ2(3)
 #define GPIO_FM_INT			S5PV210_GPJ2(4)
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_WLAN_WAKE				S5PV210_GPJ2(5)
 #define GPIO_WLAN_WAKE_AF			1
 #else
@@ -565,7 +565,7 @@
 
 #define GPIO_AP_SDA_2_8V		S5PV210_GPJ3(0)
 #define GPIO_AP_SCL_2_8V		S5PV210_GPJ3(1)
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_ATV_RSTn			S5PV210_GPJ3(2)
 #define GPIO_ISDBT_PWR_EN_REV10		S5PV210_GPJ3(2)
 #else
@@ -592,7 +592,7 @@
 
 #define GPIO_AP_PMIC_SCL		S5PV210_GPJ4(3)
 
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 // CMC623
 #define GPIO_CMC_SHDN			S5PV210_MP01(0)
 #define GPIO_CMC_SHDN_AF		2
@@ -605,7 +605,7 @@
 
 #define GPIO_RESET_REQ_N			S5PV210_MP01(2)
 
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_CMC_RST			S5PV210_MP01(3)
 #define GPIO_CMC_RST_AF			2
 #endif
@@ -616,7 +616,7 @@
 
 #define GPIO_DIC_ID			S5PV210_MP01(5)
 
-#if !defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1)
 #define GPIO_EAR_MICBIAS_EN     S5PV210_MP01(5)
 #endif
 
@@ -648,12 +648,12 @@
 
 #define GPIO_PCM_SEL			S5PV210_MP03(7)
 
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_GPS_CLK_EN				S5PV210_MP04(0)
 #endif
 #define GPIO_USB_SEL			S5PV210_MP04(0)
 
-#if defined(CONFIG_MACH_P1_LTN) // Rev1.0 (Only latin HW04)  
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N) // Rev1.0 (Only latin HW04)  
 #define GPIO_TV_CLK_EN 	        S5PV210_MP04(1)
 #endif 
 
@@ -663,7 +663,7 @@
 
 #define GPIO_DISPLAY_SI			S5PV210_MP04(3)
 
-#if defined(CONFIG_MACH_P1_LTN)
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
 #define GPIO_CMC_EN				S5PV210_MP04(4)
 #define GPIO_CMC_EN_AF			1
 #endif
@@ -672,7 +672,7 @@
 #define GPIO_CMC_SDA_18V			S5PV210_MP04(5)	// Rev0.9
 #define GPIO_LVDS_RST			S5PV210_MP04(5)
 
-#if !defined(CONFIG_MACH_P1_LTN) 
+#if defined(CONFIG_SAMSUNG_P1)
 #define GPIO_GPS_CLK_EN			S5PV210_MP04(6)
 #endif
 #define GPIO_CMC_SCL_18V			S5PV210_MP04(6)  // Rev1.2
@@ -691,12 +691,12 @@
 #define GPIO_MP054			S5PV210_MP05(4)
 #define GPIO_LVDS_SHDN				S5PV210_MP05(4)
 
-#if defined(CONFIG_MACH_P1_LTN) // ys325.chang 2011.03.04
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N) // ys325.chang 2011.03.04
 #define GPIO_EAR_MICBIAS_EN			S5PV210_MP05(5)
 #endif
 #define GPIO_MLCD_RST			S5PV210_MP05(5)
 
-#if defined(CONFIG_MACH_P1_LTN) // ys325.chang 2011.03.04
+#if defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N) // ys325.chang 2011.03.04
 #define GPIO_CMC_BYPASS			S5PV210_MP05(6)
 #define GPIO_CMC_BYPASS_AF		2
 #endif
@@ -718,7 +718,7 @@
 #define PMIC_I2C_SDA			S5PV210_GPJ4(0)
 #define PMIC_I2C_SCL			S5PV210_GPJ4(3)
 
-#if !defined(CONFIG_MACH_P1_LTN) 
+#if defined(CONFIG_SAMSUNG_P1) 
 #define GPIO_TOUCH_INT			S5PV210_GPJ0(5)
 #define	GPIO_TOUCH_INT_AF		0xFF
 #endif

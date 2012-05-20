@@ -139,7 +139,7 @@ config MACH_HERRING
 	  Machine support for Herring
 
 config MACH_P1
-	bool "P1"
+	bool "Samsung Galaxy TAB 7"
 	select CPU_S5PV210
 	select ARCH_DISCONTIGMEM_ENABLE
 	select S3C_DEV_WDT
@@ -155,16 +155,31 @@ config MACH_P1
 	select S5PV210_SETUP_SDHCI
 	select S5PV210_POWER_DOMAIN
 	help
-	  Machine support for P1
+	  Machine support for P1000 GSM devices (P1000,P1000L and P1000N)
 
 config MACH_P1_GSM
-	bool "P1 GSM locale"
+	bool "GSM"
+	depends on MACH_P1
+	help
+		"P1 GSM locale"
 
-config MACH_P1_CDMA
-	bool "P1 CDMA locale"
+config SAMSUNG_P1
+	bool "P1"
+	depends on MACH_P1_GSM
+	help
+		"P1000 Device Model"
 
-config MACH_P1_LTN
-	bool "P1 LTN locale"
+config SAMSUNG_P1L
+	bool "P1L"
+	depends on MACH_P1_GSM
+	help
+		"P1000L Device Model"
+
+config SAMSUNG_P1N
+	bool "P1N"
+	depends on MACH_P1_GSM
+	help
+		"P1000N Device Model"
 
 config S5PV210_SETUP_FB
 	bool
