@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAT3///Ag\u003d",
+        "filename": "arch/arm/configs/cyanogenmod_p1_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 1280,
+      "author": {
+        "id": 2751
+      },
+      "writtenOn": "2012-06-03T20:22:58Z",
+      "side": 0,
+      "message": "We won\u0027t use it atm.\nI will check CE147 source and port some features to ISX005.",
+      "parentUuid": "AAAAT3///DA\u003d",
+      "revId": "5da2624b5aa179019b976245a633b8a1df5093f4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAT3///C8\u003d",
         "filename": "arch/arm/configs/cyanogenmod_p1_defconfig",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2012-06-03T18:55:31Z",
       "side": 0,
       "message": "this as well",
+      "revId": "5da2624b5aa179019b976245a633b8a1df5093f4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAT3///Ac\u003d",
+        "filename": "arch/arm/configs/cyanogenmod_p1_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 1598,
+      "author": {
+        "id": 2751
+      },
+      "writtenOn": "2012-06-03T20:22:58Z",
+      "side": 0,
+      "message": "same here",
+      "parentUuid": "AAAAT3///C8\u003d",
       "revId": "5da2624b5aa179019b976245a633b8a1df5093f4",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
