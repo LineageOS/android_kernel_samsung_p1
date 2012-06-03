@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAT3///DA\u003d",
+        "filename": "arch/arm/configs/cyanogenmod_p1_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 1280,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2012-06-03T18:55:31Z",
+      "side": 0,
+      "message": "why did you removed this humberos?",
+      "revId": "5da2624b5aa179019b976245a633b8a1df5093f4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAT3///C8\u003d",
+        "filename": "arch/arm/configs/cyanogenmod_p1_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 1598,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2012-06-03T18:55:31Z",
+      "side": 0,
+      "message": "this as well",
+      "revId": "5da2624b5aa179019b976245a633b8a1df5093f4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
