@@ -64,16 +64,6 @@ unsigned int freq_uv_table[7][3] = {
 	{100000, 950, 950}
 };
 
-unsigned int freq_int_uv_table[7][3] = {
-	{1400000, 1250, 1250},
-	{1200000, 1200, 1200},
-	{1000000, 1100, 1100},
-	{800000, 1100, 1100},
-	{400000, 1100, 1100},
-	{200000, 1100, 1100},
-	{100000, 1000, 1000}
-};
-
 /* frequency */
 static struct cpufreq_frequency_table freq_table[] = {
 	{OC0, 1400*1000},
