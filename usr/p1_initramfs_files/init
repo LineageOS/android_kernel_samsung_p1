@@ -13,8 +13,8 @@ bml_over_mtd dump boot 72 reservoir 2004 /stage1/boot.bin
 
 load_image=/stage1/boot.cpio
 
-busybox mount -t yaffs2 /dev/block/mtdblock2 /system
-busybox mount -t yaffs2 /dev/block/mtdblock3 /cache
+busybox mount -t ext4 /dev/block/mmcblk0p2 /system
+busybox mount -t ext4 /dev/block/mmcblk0p3 /cache
 
 if busybox test -e /cache/.startrecovery || [ `busybox cat /proc/cmdline | busybox grep bootmode | busybox awk '{print $2}'` == bootmode=2 ] ; then
 	# recovery boot
@@ -27,7 +27,7 @@ elif ! busybox test -e /system/build.prop ; then
 	# emergency boot
 	busybox umount /cache
 	erase_image cache
-	busybox mount -t yaffs2 /dev/block/mtdblock3 /cache
+	busybox mount -t ext4 /dev/block/mmcblk0p3 /cache
 	busybox mkdir /cache/recovery
 
 	busybox mount -t vfat /dev/block/mmcblk0p1 /sdcard	
