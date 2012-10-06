@@ -34,6 +34,7 @@ obj-$(CONFIG_MACH_HERRING)	        += dev-crespo-phone.o
 # P1
 obj-$(CONFIG_MACH_P1)	            += mach-p1.o p1-rfkill.o sec_switch.o
 obj-$(CONFIG_MACH_P1)	            += herring-watchdog.o
+obj-$(CONFIG_MACH_P1)               += p1-vibrator.o
 obj-$(CONFIG_MACH_P1)	            += herring-panel.o
 obj-$(CONFIG_MACH_P1_GSM)           += dev-p1-phone.o
 
