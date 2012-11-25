@@ -90,8 +90,8 @@ static struct struct_frame_buf_mark  frame_buf_mark = {
 	.special_mark_3 = (('H' << 24) | ('e' << 16) | ('r' << 8) | ('e' << 0)),
 	.special_mark_4 = (('f' << 24) | ('b' << 16) | ('u' << 8) | ('f' << 0)),
 	.p_fb   = 0,
-	.resX   = 1024,
-	.resY   = 600,
+	.resX   = 600,
+	.resY   = 1024,
 	.bpp    = 32,
 	.frames = 2
 };
@@ -330,6 +330,8 @@ static int s3cfb_map_video_memory(struct fb_info *fb)
 static int s3cfb_map_default_video_memory(struct fb_info *fb)
 {
 #if defined(CONFIG_FB_S3C_VIRTUAL)
+	struct s3cfb_global *fbdev =
+		platform_get_drvdata(to_platform_device(fb->device));
 	struct fb_fix_screeninfo *fix = &fb->fix;
 	struct s3cfb_window *win = fb->par;
 	struct s3c_platform_fb *pdata = to_fb_plat(fbdev->dev);

@@ -318,8 +318,8 @@ static struct s3c2410_uartcfg crespo_uartcfgs[] __initdata = {
 };
 
 static struct s3cfb_lcd lvds = {
-        .width = 1024,
-        .height = 600,
+        .width = 600,
+        .height = 1024,
 		.p_width = 154,
 		.p_height = 90,
 		.bpp = 24,
