@@ -51,6 +51,7 @@ static struct wake_lock rfkill_wake_lock;
 static struct rfkill *bt_rfk;
 
 static const char bt_name[] = "bcm4329";
+static bool current_blocked = true;
 
 #ifdef BT_SLEEP_ENABLE
 static struct wake_lock bt_wake_lock;
@@ -208,6 +209,13 @@ irqreturn_t bt_host_wake_irq_handler(int irq, void *dev_id)
 static int bt_rfkill_set_block(void *data, bool blocked)
 {
 	unsigned int ret = 0;
+
+	if (current_blocked == blocked) {
+		pr_debug("[BT] keeping current blocked state %d\n", blocked);
+		return ret;
+	}
+
+	current_blocked = blocked;
 
 	ret = bluetooth_set_power(data, blocked ?
 			RFKILL_USER_STATE_SOFT_BLOCKED :
@@ -377,7 +385,7 @@ static int __init crespo_rfkill_probe(struct platform_device *pdev)
 	}
 
 	rfkill_set_sw_state(bt_rfk, 1);
-	bluetooth_set_power(NULL, RFKILL_USER_STATE_SOFT_BLOCKED);
+	bt_rfkill_set_block(NULL, true);
 
 #ifdef BT_SLEEP_ENABLE
 	wake_lock_init(&bt_wake_lock, WAKE_LOCK_SUSPEND, "bt_wake");
