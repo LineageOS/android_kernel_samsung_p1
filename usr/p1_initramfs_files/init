@@ -60,4 +60,11 @@ busybox umount /proc
 busybox date >>boot.txt
 busybox rm -fr /stage1 /dev/*
 export PATH="${_PATH}"
+HW=$(cat /proc/cpuinfo | grep Hardware | busybox sed s/Hardware// | busybox tr '[A-Z]' '[a-z]' | busybox tr -d ' ' | busybox tr -d ':')
+if [ "$HW" != "p1" ] ; then
+	if [ "$image" == "/stage1/boot.cpio" ] ; then
+		busybox ln -s /init.p1.rc /init.$HW.rc
+	fi
+	busybox ln -s /ueventd.p1.rc /ueventd.$HW.rc
+fi
 exec /init
