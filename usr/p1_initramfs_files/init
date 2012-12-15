@@ -28,7 +28,7 @@ elif ! busybox test -e /system/build.prop ; then
 	busybox mount -t ext4 /dev/block/mmcblk0p3 /cache
 	busybox mkdir /cache/recovery
 
-	busybox mount -t vfat /dev/block/mmcblk0p1 /sdcard	
+	busybox mount -t vfat /dev/block/mmcblk0p1 /sdcard
 
 	UPDATE=$(busybox cat /sdcard/cyanogenmod.cfg)
 
@@ -53,6 +53,14 @@ if busybox grep -q 1 /sys/class/power_supply/battery/charging_mode_booting ; the
 	# low power mode
 	busybox cp lpm.rc init.rc
 	busybox rm init.p1.rc
+fi
+
+HW=$(cat /proc/cpuinfo | grep Hardware | busybox sed s/Hardware// | busybox tr '[A-Z]' '[a-z]' | busybox tr -d ' ' | busybox tr -d ':')
+if [ "$HW" != "p1" ] ; then
+	if [ "$image" == "/stage1/boot.cpio" ] ; then
+		busybox ln -s /init.p1.rc /init.$HW.rc
+	fi
+	busybox ln -s /ueventd.p1.rc /ueventd.$HW.rc
 fi
 
 busybox umount /sys
